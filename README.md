@@ -8,17 +8,16 @@ pip3 install -r requirements.txt
 
 # Run 
 
-参数：CS服务器IP  需要上线的beacon数量
 
-1、
+1、参数：CS服务器IP  需要上线的beacon数量
 
 python3 happy_cobalt_strike.py http://127.0.0.1 50
 
-2、
+2、支持https
 
 python3 happy_cobalt_strike.py https://127.0.0.1 50
 
-3、
+3、修改端口
 python3 happy_cobalt_strike.py http://127.0.0.1:8080 50
 
 # Effect
