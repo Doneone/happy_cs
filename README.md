@@ -1,7 +1,9 @@
 # install
 
 git clone https://github.com/Doneone/happy_cs
+
 cd happy_cs
+
 pip3 install -r requirements.txt
 
 # run 
