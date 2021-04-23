@@ -11,7 +11,7 @@ def scan_beacon(HOST):
 
     print("Checking {}".format(HOST))
     try:
-        r = requests.get(urljoin("http://"+HOST, "/aaa9"), headers={'user-agent': ua}, verify=False, timeout=5)
+        r = requests.get(urljoin(HOST, "/aaa9"), headers={'user-agent': ua}, verify=False, timeout=5)
         if r.status_code == 200:
             data = r.content
             if data.startswith(b"\xfc\xe8"):
@@ -19,16 +19,16 @@ def scan_beacon(HOST):
                 if beacon:
                     config = decode_config(beacon)
                     if config:
-                        print("Configuration of the x86 payload:")
+                        #print("Configuration of the x86 payload:")
                         for d in config:
                             if isinstance(config[d], bytearray):
-                                pass
-                                #print("{:30} {}".format(d, config[d].hex()))
+                                #pass
+                                print("{:30} {}".format(d, config[d].hex()))
                             else:
-                                pass
-                                #print("{:30} {}".format(d, config[d]))
+                                #pass
+                                print("{:30} {}".format(d, config[d]))
                         print("")
-                        return(config["publickey"].strip(b'\x00'))
+                        return(config["publickey"].strip(b'\x00'),config[".http-get.uri"],config["port"],config["ssl"])
                     else:
                         print("x86: Impossible to extract the configuration")
                 else:
@@ -58,7 +58,7 @@ def scan_beacon(HOST):
         else:
             print("x86: HTTP Status code {}".format(r.status_code))
 
-        r = requests.get(urljoin("http://"+HOST, "aab9"), headers={'user-agent': ua}, verify=False, timeout=5)
+        r = requests.get(urljoin(HOST, "aab9"), headers={'user-agent': ua}, verify=False, timeout=5)
         if r.status_code == 200:
             data = r.content
             if data.startswith(b"\xfc\xe8"):
